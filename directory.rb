@@ -2,27 +2,33 @@
 #This code puts all the students into an array
 
  def input_students
-     puts "Please enter the names of the students and their cohorts, 
-followed by something they enjoy doing".center(40)
-     puts "To finish, just hit return three times".center(30)
+  puts "Please enter the names of the students and their cohorts, followed by something they enjoy doing".center(40)
+  puts "To finish, just hit return three times".center(30)
 
-     students = []
-     
-     name = gets.chomp
-     cohort = gets.chomp
-     hobbies = gets.chomp
-     while !name.empty? do
-         cohort = "Mystery" if cohort.empty?
-         students << {name: name, cohort: cohort, hobbies: hobbies}
-         puts "Now we have #{students.count} students"
+  students = []
 
-        name = gets.chomp
-        cohort = gets.chomp
-        hobbies = gets.chomp
+  valid_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+  name = gets.chomp
+  cohort = gets.chomp.capitalize
+  hobbies = gets.chomp
+
+  while !name.empty? do
+    if !valid_months.include?(cohort)
+      puts "Invalid month. Please enter a valid month:"
+      cohort = gets.chomp.capitalize
     end
 
-    students
+    students << {name: name, cohort: cohort.to_sym, hobbies: hobbies}
 
+    puts "Now we have #{students.count} students"
+
+    name = gets.chomp
+    cohort = gets.chomp.capitalize
+    hobbies = gets.chomp
+  end
+
+  students
 end
 
 
