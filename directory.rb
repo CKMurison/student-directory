@@ -9,11 +9,11 @@
      
      name = gets.chomp
      while !name.empty? do
-         if name[0] == "J"
+         if name.length < 12
          students << {name: name, cohort: :november}
          puts "Now we have #{students.count} students"
         else
-            puts "Enter a name that starts with J!"
+            puts "Enter a name with less than 12 characters!"
         end
         name = gets.chomp
     end
