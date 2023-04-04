@@ -3,15 +3,15 @@
 
  def input_students
      puts "Please enter the names of the students, 
-followed by a hobby they enjoy doing"
-     puts "To finish, just hit return twice"
+followed by a hobby they enjoy doing".center(40)
+     puts "To finish, just hit return twice".center(30)
 
      students = []
 
      name = gets.chomp
      hobbies = gets.chomp
      while !name.empty? do
-         students << {name: name, cohort: :november, hobbies: hobbies, }
+         students << {name: name, cohort: :november, hobbies: hobbies}
          puts "Now we have #{students.count} students"
 
         name = gets.chomp
