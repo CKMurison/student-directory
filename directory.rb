@@ -2,19 +2,22 @@
 #This code puts all the students into an array
 
  def input_students
-     puts "Please enter the names of the students, 
-followed by a hobby they enjoy doing".center(40)
-     puts "To finish, just hit return twice".center(30)
+     puts "Please enter the names of the students and their cohorts, 
+followed by something they enjoy doing".center(40)
+     puts "To finish, just hit return three times".center(30)
 
      students = []
-
+     
      name = gets.chomp
+     cohort = gets.chomp
      hobbies = gets.chomp
      while !name.empty? do
-         students << {name: name, cohort: :november, hobbies: hobbies}
+         cohort = "Mystery" if cohort.empty?
+         students << {name: name, cohort: cohort, hobbies: hobbies}
          puts "Now we have #{students.count} students"
 
         name = gets.chomp
+        cohort = gets.chomp
         hobbies = gets.chomp
     end
 
