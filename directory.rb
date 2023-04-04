@@ -30,8 +30,11 @@ end
 end
 
 def print(students)
-  students.each.with_index(1) do |student, index|
+  index = 1
+  while index <= students.length
+    student = students[index - 1]
     puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    index += 1
   end
 end
     
