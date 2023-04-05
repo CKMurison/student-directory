@@ -58,7 +58,13 @@ end
     
  
 def print_footer(students)
-puts "Overall we have #{students.count} great students"
+if students.length == 1
+  puts "Overall we have #{students.count} great student"
+elsif students.length == 0 
+  puts "*the halls are empty*"
+else
+  puts "Overall we have #{students.count} great students"
+end
 end
 
 students = input_students
