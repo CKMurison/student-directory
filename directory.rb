@@ -5,7 +5,12 @@
   puts "Please enter the names of the students and their cohorts, followed by something they enjoy".center(40)
   puts "To finish, just hit return three times".center(30)
 
-  students = []
+  students = [
+  {name: "Sammy", cohort: "March", hobbies: "Soup"}, 
+  {name: "David", cohort: "March", hobbies: "Bread"}, 
+  {name: "Wilson", cohort: "March", hobbies: "Cheese"}, 
+  {name: "Amira", cohort: "March", hobbies: "Books"}
+]
 
   valid_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -51,7 +56,12 @@ def print(students)
   index = 1
   while index <= students.length
     student = students[index - 1]
+    puts "what month do you want to view?"
+    input = gets.chomp
+    if input == "March"
     puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort). This student enjoys #{student[:hobbies]}"
+    else puts "please select a valid month. Currently March"
+    end
     index += 1
   end
 end
@@ -71,3 +81,16 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+
+
+
+
+
+def print(students)
+  index = 1
+  while index <= students.length
+    student = students[index - 1]
+    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort). This student enjoys #{student[:hobbies]}"
+    index += 1
+  end
+end
