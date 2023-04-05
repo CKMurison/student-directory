@@ -25,9 +25,13 @@
     end
     
     students << {name: name, cohort: cohort, hobbies: hobbies}
-
+    
+  if students.length == 1 
+    puts "Now we have #{students.count} student"
+  else 
     puts "Now we have #{students.count} students"
-
+  end
+  
     name = gets.chomp
     cohort = gets.chomp.capitalize
     hobbies = gets.chomp
