@@ -1,16 +1,12 @@
 
 #This code puts all the students into an array
 
+
  def input_students
   puts "Please enter the names of the students and their cohorts, followed by something they enjoy".center(40)
   puts "To finish, just hit return three times".center(30)
 
-  students = [
-  {name: "Sammy", cohort: "March", hobbies: "Soup"}, 
-  {name: "David", cohort: "March", hobbies: "Bread"}, 
-  {name: "Wilson", cohort: "March", hobbies: "Cheese"}, 
-  {name: "Amira", cohort: "March", hobbies: "Books"}
-]
+  students = []
 
   valid_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -43,25 +39,20 @@
   end
 
   students
-end
-
+ end
+ 
 
 
  def print_header
  puts "The students of Villains Academy"
  puts "-------------"
-end
+ end
 
 def print(students)
   index = 1
   while index <= students.length
     student = students[index - 1]
-    puts "what month do you want to view?"
-    input = gets.chomp
-    if input == "March"
     puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort). This student enjoys #{student[:hobbies]}"
-    else puts "please select a valid month. Currently March"
-    end
     index += 1
   end
 end
@@ -83,14 +74,27 @@ print(students)
 print_footer(students)
 
 
-
-
-
-def print(students)
-  index = 1
-  while index <= students.length
-    student = students[index - 1]
-    puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort). This student enjoys #{student[:hobbies]}"
-    index += 1
+def interactive_menu
+  students = []
+  loop do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    
+    selection = gets.chomp
+    
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      print_header
+      print(students)
+      print_footer(students)
+    when "9"
+      exit
+    else
+      puts "Please enter a valid input"
+    end
   end
 end
+ 
