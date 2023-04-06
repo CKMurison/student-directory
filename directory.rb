@@ -1,12 +1,13 @@
 
 @students = [] # an empty array accessible to all methods
+@filename = "students.csv"
 
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
-  puts "9. Exit" # 9 because we'll be adding more items
+  puts "3. Save the list to a file"
+  puts "4. Load the list from a file"
+  puts "9. Exit"
 end
 
 def interactive_menu
@@ -20,14 +21,17 @@ def process(selection)
   case selection
   when "1"
     input_students
+    puts "Input success!"
   when "2"
     show_students
-  when "9"
-    exit # this will cause the program to terminate
   when "3"
     save_students
+    puts "Students saved!"
   when "4"
     load_students
+    puts "Students loaded!"
+   when "9"
+    exit
   else
     puts "I don't know what you meant, try again"
   end
@@ -70,29 +74,39 @@ def print_footer
 end
 
 def save_students
-  # open the file for writing
-  file = File.open("students.csv", "w")
-  # iterate over the array of students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  puts "Enter filename to save:"
+  filename = gets.chomp
+  if filename.length == 0 
+    puts "Please enter a name with at least 1 character"
+  else
+  File.open(filename, "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
+  # Update the @filename instance variable to the user's chosen filename
+  @filename = filename
+end
 end
 
-def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+def load_students
+  puts "Enter filename to load:"
+  filename = gets.chomp
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(',')
+      @students << {name: name, cohort: cohort.to_sym}
+    end
   end
-  file.close
+  # Update the @filename instance variable to the user's chosen filename
+  @filename = filename
 end
+
 
 def try_load_students
-  filename = ARGV.first# first argument from the command line
-  return if filename.nil? # get out of the method if it isn't given
+  filename = ARGV.first || 'students.csv'
   if File.exists?(filename) # if it exists
     load_students(filename)
      puts "Loaded #{@students.count} from #{filename}"
